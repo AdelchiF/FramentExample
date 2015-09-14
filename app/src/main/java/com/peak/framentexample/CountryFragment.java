@@ -24,7 +24,7 @@ import com.peak.framentexample.dummy.DummyContent;
  * Activities containing this fragment MUST implement the {@link OnFragmentInteractionListener}
  * interface.
  */
-public class CountryFragment extends Fragment implements AbsListView.OnItemClickListener {
+public class CountryFragment extends Fragment implements AbsListView.OnItemClickListener, AbsListView.OnItemLongClickListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -90,6 +90,7 @@ public class CountryFragment extends Fragment implements AbsListView.OnItemClick
 
         // Set OnItemClickListener so we can be notified on item clicks
         mListView.setOnItemClickListener(this);
+        mListView.setOnItemLongClickListener(this);
 
         return view;
     }
@@ -120,6 +121,14 @@ public class CountryFragment extends Fragment implements AbsListView.OnItemClick
         }
     }
 
+    @Override
+    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+        if(null != mListener){
+            mListener.onLongClick(DummyContent.ITEMS.get(position).id);
+        }
+        return true;
+    }
+
     /**
      * The default content for this Fragment has a TextView that is shown when
      * the list is empty. If you would like to change the text, call this method
@@ -146,6 +155,9 @@ public class CountryFragment extends Fragment implements AbsListView.OnItemClick
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(String id);
+        void onLongClick(String id);
     }
+
+
 
 }

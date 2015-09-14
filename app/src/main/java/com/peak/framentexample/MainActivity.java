@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 
 public class MainActivity extends AppCompatActivity implements CountryFragment.OnFragmentInteractionListener {
@@ -47,11 +48,14 @@ public class MainActivity extends AppCompatActivity implements CountryFragment.O
             fragCountryDetails.setArguments(b);
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-            //ft.setCustomAnimations(R.anim.card_flip_right_in, R.anim.card_flip_right_out, R.anim.card_flip_left_in, R.anim.card_flip_left_out);
             ft.replace(R.id.container, CountryDetails.newInstance(id));
             ft.addToBackStack(null);
             ft.commit();
         }
     }
 
+    @Override
+    public void onLongClick(String id) {
+        Toast.makeText(getApplicationContext(), id, Toast.LENGTH_SHORT).show();
+    }
 }
